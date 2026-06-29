@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-gray-900 dark:text-gray-100 bg-white dark:bg-dark antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary-500/30 text-primary-900 dark:text-primary-100;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    @apply relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    @apply absolute -inset-[1px] rounded-[inherit] bg-gradient-to-r from-primary-500 to-accent-500 opacity-50;
+    z-index: -1;
+  }
+
+  .glass {
+    @apply bg-white/10 dark:bg-dark-card/50 backdrop-blur-xl border border-white/20 dark:border-dark-border;
+  }
+
+  .card {
+    @apply bg-white dark:bg-dark-card rounded-2xl border border-gray-200 dark:border-dark-border shadow-lg;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold px-6 py-3 rounded-full
+           transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25 hover:scale-[1.02]
+           active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply border-2 border-primary-500 text-primary-600 dark:text-primary-400 font-semibold px-6 py-3 rounded-full
+           transition-all duration-300 hover:bg-primary-500 hover:text-white;
+  }
+}
+
+@layer utilities {
+  .text-mono {
+    font-family: 'Space Grotesk', monospace;
+  }
+
+  .animate-typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid;
+    animation: typing 2s steps(30) forwards, blink 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink {
+    50% { border-color: transparent }
+  }
+
+  .particle {
+    @apply absolute rounded-full bg-primary-500/20 dark:bg-primary-400/20;
+    animation: particleFloat 8s ease-in-out infinite;
+  }
+
+  @keyframes particleFloat {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translate(20px, -30px) scale(1.2);
+      opacity: 0.6;
+    }
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-dark-surface;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-500/50 rounded-full hover:bg-primary-500/70;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
