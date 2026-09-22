@@ -1,10 +1,10 @@
-// utils/experienceYears.ts
 export const getExperienceYears = (): string => {
   const joinDate = new Date("2022-02-17");
   const now = new Date();
 
-  const diff = now.getTime() - joinDate.getTime();
-  const years = diff / (1000 * 60 * 60 * 24 * 365.25);
+  const months =
+    (now.getFullYear() - joinDate.getFullYear()) * 12 +
+    (now.getMonth() - joinDate.getMonth());
 
-  return years.toFixed(1);
+  return (months / 12).toFixed(1);
 };
