@@ -5,6 +5,13 @@ import { Mail, Phone, MapPin, Send, Github, Linkedin, CheckCircle } from 'lucide
 import emailjs from '@emailjs/browser';
 import { profileInfo } from '../constants';
 
+const SERVICES = {
+  gmail: "service_yvrlzsm",
+  outlook: "service_oraj8xb",
+};
+
+const PUBLIC_KEY = "nB-2p0y-hWUTHsKaM";
+
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -49,6 +56,16 @@ export const Contact: React.FC = () => {
     });
   };
 
+  // Tries Gmail service first; if it fails, automatically retries with Outlook
+  const sendWithFallback = async (templateId: string, params: any) => {
+    try {
+      return await emailjs.send(SERVICES.gmail, templateId, params, PUBLIC_KEY);
+    } catch (gmailError) {
+      console.warn("Gmail service failed, retrying with Outlook:", gmailError);
+      return await emailjs.send(SERVICES.outlook, templateId, params, PUBLIC_KEY);
+    }
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -58,7 +75,7 @@ export const Contact: React.FC = () => {
       from_name: formData.name,
       from_email: formData.email,
       message: formData.message,
-       phone: formData.phone,
+      phone: formData.phone,
       to_email: "yogendharbolisetti@gmail.com", // Ensure this is used in your EmailJS template
     };
 
@@ -66,35 +83,24 @@ export const Contact: React.FC = () => {
       to_name: formData.name,
       user_email: formData.email, // EmailJS expects 'user_email' by default
       phone: formData.phone,
-      message:formData.message,
+      message: formData.message,
       from_name: "Yogendhar Sri Ram",
-     
     };
 
     try {
       setIsSubmitting(true);
 
-      await emailjs.send(
-        "service_yvrlzsm",
-        "template_dh8sxs6",
-        templateParamsAdmin,
-        "nB-2p0y-hWUTHsKaM"
-      );
+      await sendWithFallback("template_dh8sxs6", templateParamsAdmin);
       console.log("Admin email sent");
 
-      await emailjs.send(
-        "service_yvrlzsm",
-        "template_f92axv9",
-        templateParamsSender,
-        "nB-2p0y-hWUTHsKaM"
-      );
+      await sendWithFallback("template_f92axv9", templateParamsSender);
       console.log("Auto-reply sent");
 
       // alert("Message sent successfully!");
       setFormData({ name: "", email: "", phone: "", message: "" });
       setIsSubmitted(true);
     } catch (error: any) {
-      console.error("Email send failed:", error);
+      console.error("Email send failed on both services:", error);
       alert("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -143,7 +149,7 @@ export const Contact: React.FC = () => {
                   <h4 className="text-base font-medium text-gray-900 dark:text-white mb-1">
                     Email
                   </h4>
-                  <a
+                  
                     href={`mailto:${profileInfo.email}`}
                     className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                   >
