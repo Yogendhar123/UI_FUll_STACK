@@ -8,9 +8,21 @@ import { profileInfo } from '../constants';
 const SERVICES = {
   gmail: "service_yvrlzsm",
   outlook: "service_oraj8xb",
+  corporate: "service_XXXXXXX",
 };
 
 const PUBLIC_KEY = "nB-2p0y-hWUTHsKaM";
+
+const FREE_EMAIL_DOMAINS = [
+  "gmail.com", "yahoo.com", "outlook.com", "hotmail.com",
+  "icloud.com", "aol.com", "protonmail.com", "live.com",
+];
+
+const isCorporateEmail = (email: string): boolean => {
+  const domain = email.split("@")[1];
+  if (!domain) return false;
+  return !FREE_EMAIL_DOMAINS.includes(domain.toLowerCase().trim());
+};
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -56,32 +68,34 @@ export const Contact: React.FC = () => {
     });
   };
 
-  // Tries Gmail service first; if it fails, automatically retries with Outlook
-  const sendWithFallback = async (templateId: string, params: any) => {
+  const sendVia = async (serviceId: string, templateId: string, params: any) => {
     try {
+      return await emailjs.send(serviceId, templateId, params, PUBLIC_KEY);
+    } catch (err) {
+      console.warn("Primary service failed, falling back to Gmail:", err);
       return await emailjs.send(SERVICES.gmail, templateId, params, PUBLIC_KEY);
-    } catch (gmailError) {
-      console.warn("Gmail service failed, retrying with Outlook:", gmailError);
-      return await emailjs.send(SERVICES.outlook, templateId, params, PUBLIC_KEY);
     }
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    console.log("formData before sending:", formData); // Debug
+    console.log("formData before sending:", formData);
+
+    const corporate = isCorporateEmail(formData.email);
+    const adminServiceId = corporate ? SERVICES.corporate : SERVICES.outlook;
 
     const templateParamsAdmin = {
       from_name: formData.name,
       from_email: formData.email,
       message: formData.message,
       phone: formData.phone,
-      to_email: "yogendharbolisetti@gmail.com", // Ensure this is used in your EmailJS template
+      to_email: "yogendharbolisetti@gmail.com",
     };
 
     const templateParamsSender = {
       to_name: formData.name,
-      user_email: formData.email, // EmailJS expects 'user_email' by default
+      user_email: formData.email,
       phone: formData.phone,
       message: formData.message,
       from_name: "Yogendhar Sri Ram",
@@ -90,17 +104,16 @@ export const Contact: React.FC = () => {
     try {
       setIsSubmitting(true);
 
-      await sendWithFallback("template_dh8sxs6", templateParamsAdmin);
+      await sendVia(adminServiceId, "template_dh8sxs6", templateParamsAdmin);
       console.log("Admin email sent");
 
-      await sendWithFallback("template_f92axv9", templateParamsSender);
+      await sendVia(SERVICES.outlook, "template_f92axv9", templateParamsSender);
       console.log("Auto-reply sent");
 
-      // alert("Message sent successfully!");
       setFormData({ name: "", email: "", phone: "", message: "" });
       setIsSubmitted(true);
     } catch (error: any) {
-      console.error("Email send failed on both services:", error);
+      console.error("Email send failed:", error);
       alert("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -131,17 +144,13 @@ export const Contact: React.FC = () => {
           animate={inView ? "visible" : "hidden"}
           className="grid grid-cols-1 lg:grid-cols-2 gap-12"
         >
-          {/* Contact Info */}
           <motion.div variants={itemVariants}>
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
               Contact Information
             </h3>
 
             <div className="space-y-6 mb-8">
-              <motion.div
-                whileHover={{ x: 5 }}
-                className="flex items-start gap-4"
-              >
+              <motion.div whileHover={{ x: 5 }} className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-white flex items-center justify-center flex-shrink-0">
                   <Mail size={20} />
                 </div>
@@ -149,19 +158,13 @@ export const Contact: React.FC = () => {
                   <h4 className="text-base font-medium text-gray-900 dark:text-white mb-1">
                     Email
                   </h4>
-                  
-                    href={`mailto:${profileInfo.email}`}
-                    className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                  >
+                  <a href={"mailto:" + profileInfo.email} className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                     {profileInfo.email}
                   </a>
                 </div>
               </motion.div>
 
-              <motion.div
-                whileHover={{ x: 5 }}
-                className="flex items-start gap-4"
-              >
+              <motion.div whileHover={{ x: 5 }} className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-white flex items-center justify-center flex-shrink-0">
                   <Phone size={20} />
                 </div>
@@ -175,10 +178,7 @@ export const Contact: React.FC = () => {
                 </div>
               </motion.div>
 
-              <motion.div
-                whileHover={{ x: 5 }}
-                className="flex items-start gap-4"
-              >
+              <motion.div whileHover={{ x: 5 }} className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-white flex items-center justify-center flex-shrink-0">
                   <MapPin size={20} />
                 </div>
@@ -193,10 +193,7 @@ export const Contact: React.FC = () => {
               </motion.div>
             </div>
 
-            <motion.div
-              variants={itemVariants}
-              className="card p-6"
-            >
+            <motion.div variants={itemVariants} className="card p-6">
               <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
                 Connect With Me
               </h4>
@@ -227,7 +224,6 @@ export const Contact: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div variants={itemVariants}>
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
               Send Me a Message
@@ -247,16 +243,13 @@ export const Contact: React.FC = () => {
                     Message Sent!
                   </h4>
                   <p className="text-gray-600 dark:text-gray-400">
-                    Thank you for reaching out. I'll get back to you as soon as possible.
+                    Thank you for reaching out. I will get back to you as soon as possible.
                   </p>
                 </motion.div>
               ) : (
                 <>
                   <motion.div variants={itemVariants}>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                    >
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Your Name
                     </label>
                     <input
@@ -272,10 +265,7 @@ export const Contact: React.FC = () => {
                   </motion.div>
 
                   <motion.div variants={itemVariants}>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                    >
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Your Email
                     </label>
                     <input
@@ -291,10 +281,7 @@ export const Contact: React.FC = () => {
                   </motion.div>
 
                   <motion.div variants={itemVariants}>
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                    >
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Your Phone Number
                     </label>
                     <input
@@ -309,10 +296,7 @@ export const Contact: React.FC = () => {
                   </motion.div>
 
                   <motion.div variants={itemVariants}>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                    >
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Message
                     </label>
                     <textarea
@@ -332,11 +316,7 @@ export const Contact: React.FC = () => {
                     disabled={isSubmitting}
                     whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                     whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                    className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-medium ${
-                      isSubmitting
-                        ? 'bg-primary-400 cursor-not-allowed'
-                        : 'btn-primary'
-                    } transition-all`}
+                    className={"w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-medium " + (isSubmitting ? "bg-primary-400 cursor-not-allowed" : "btn-primary") + " transition-all"}
                   >
                     {isSubmitting ? (
                       <>
@@ -346,14 +326,7 @@ export const Contact: React.FC = () => {
                           fill="none"
                           viewBox="0 0 24 24"
                         >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          />
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                           <path
                             className="opacity-75"
                             fill="currentColor"
