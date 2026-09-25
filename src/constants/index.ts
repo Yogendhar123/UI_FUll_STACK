@@ -272,7 +272,7 @@ export const techOrbitItems = [
 ];
 
 export const floatingBadges = [
-  { icon: "💼", text: `${experienceYears} Years Experience` },
-  { icon: "⚡", text: "Full-Stack Developer" },
-  { icon: "🤖", text: "GenAI Workflows" },
+  // { icon: "💼", text: `${experienceYears} Years Experience` },
+  // { icon: "⚡", text: "Full-Stack Developer" },
+  // { icon: "🤖", text: "GenAI Workflows" },
 ];
