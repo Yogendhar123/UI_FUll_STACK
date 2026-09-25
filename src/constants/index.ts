@@ -1,5 +1,13 @@
 import { getExperienceYears } from "../utiles/experience";
-import { SiReact, SiAngular, SiNodedotjs, SiPython } from "react-icons/si";
+import {
+  SiReact,
+  SiAngular,
+  SiNodedotjs,
+  SiPython,
+  SiMongodb,
+  
+} from 'react-icons/si';
+import { VscAzure } from "react-icons/vsc";
 const experienceYears = getExperienceYears();
 
 export const tagColorMap = {
@@ -264,28 +272,38 @@ export const profileInfo = {
   resumeLink: "#",
 };
 
+
 export const techOrbitItems = [
   {
-    name: "React",
+    name: 'React',
     icon: SiReact,
-    color: "#61DAFB",
+    color: '#61DAFB',
   },
   {
-    name: "Angular",
+    name: 'Angular',
     icon: SiAngular,
-    color: "#DD0031",
+    color: '#DD0031',
   },
   {
-    name: "Node",
+    name: 'Azure',
+    icon: VscAzure,
+    color: '#0078D4',
+  },
+  {
+    name: 'Node',
     icon: SiNodedotjs,
-    color: "#339933",
+    color: '#339933',
   },
   {
-    name: "Python",
-    icon: SiPython,
-    color: "#3776AB",
+    name: 'MongoDB',
+    icon: SiMongodb,
+    color: '#47A248',
   },
-  
+  {
+    name: 'Python',
+    icon: SiPython,
+    color: '#3776AB',
+  },
 ];
 
 export const floatingBadges = [

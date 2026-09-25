@@ -182,9 +182,117 @@ const ParticleField: React.FC = () => {
 /* =========================================================
    ORBITING TECH ICONS
 ========================================================= */
+const TechOrbitIcon: React.FC<{
+  item: any;
+  angle: number;
+  radius: number;
+  reverseRotation: boolean;
+  duration: number;
+}> = ({
+  item,
+  angle,
+  radius,
+  reverseRotation,
+  duration,
+}) => {
+  const Icon = item.icon;
 
+  const radian = (angle * Math.PI) / 180;
+
+  const x = Math.cos(radian) * radius;
+  const y = Math.sin(radian) * radius;
+
+  return (
+    <motion.div
+      className="
+        absolute
+        left-1/2
+        top-1/2
+        z-[60]
+        w-12
+        h-12
+        flex
+        items-center
+        justify-center
+        rounded-full
+        bg-[#10131d]/95
+        backdrop-blur-md
+        border
+        border-white/10
+        pointer-events-auto
+      "
+      style={{
+        x,
+        y,
+        marginLeft: '-24px',
+        marginTop: '-24px',
+
+        boxShadow: `
+          0 8px 20px rgba(0,0,0,0.45),
+          0 0 18px ${item.color}66,
+          0 0 35px ${item.color}22,
+          inset 0 1px 2px rgba(255,255,255,0.15)
+        `,
+      }}
+      animate={{
+        rotate: reverseRotation ? 360 : -360,
+        scale: [1, 1.06, 1],
+      }}
+      transition={{
+        rotate: {
+          duration,
+          repeat: Infinity,
+          ease: 'linear',
+        },
+
+        scale: {
+          duration: 3,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        },
+      }}
+      whileHover={{
+        scale: 1.25,
+
+        boxShadow: `
+          0 12px 30px rgba(0,0,0,0.5),
+          0 0 30px ${item.color}99,
+          0 0 50px ${item.color}55
+        `,
+      }}
+      title={item.name}
+    >
+      <Icon
+        className="text-[30px]"
+        style={{
+          color: item.color,
+
+          filter: `
+            drop-shadow(0 0 5px ${item.color})
+            drop-shadow(0 0 10px ${item.color}66)
+          `,
+        }}
+      />
+    </motion.div>
+  );
+};
 const OrbitingIcons: React.FC = () => {
-  const orbitRadius = 175;
+  const innerIcons = techOrbitItems.filter(
+    (item) =>
+      item.name === 'React' ||
+      item.name === 'Angular' ||
+      item.name === 'Azure'
+  );
+
+  const outerIcons = techOrbitItems.filter(
+    (item) =>
+      item.name === 'Node' ||
+      item.name === 'MongoDB' ||
+      item.name === 'Python'
+  );
+
+  const innerRadius = 150;
+  const outerRadius = 190;
 
   return (
     <div
@@ -199,124 +307,85 @@ const OrbitingIcons: React.FC = () => {
         overflow-visible
       "
     >
-      {/* Outer orbit */}
+      {/* =================================================
+          INNER ORBIT
+          CLOCKWISE
+      ================================================= */}
+
       <motion.div
         className="
           absolute
-          w-[350px]
-          h-[350px]
+          w-[300px]
+          h-[300px]
           rounded-full
           border
-          border-primary-500/20
-          dark:border-primary-400/30
+          border-cyan-400/20
         "
         animate={{
           rotate: 360,
         }}
         transition={{
-          duration: 20,
+          duration: 18,
           repeat: Infinity,
-          ease: "linear",
+          ease: 'linear',
         }}
-      />
+      >
+        {innerIcons.map((item, index) => {
+          const angle =
+            index * (360 / innerIcons.length);
 
-      {/* Inner orbit */}
+          return (
+            <TechOrbitIcon
+              key={item.name}
+              item={item}
+              angle={angle}
+              radius={innerRadius}
+              reverseRotation={true}
+              duration={18}
+            />
+          );
+        })}
+      </motion.div>
+
+      {/* =================================================
+          OUTER ORBIT
+          ANTI-CLOCKWISE
+      ================================================= */}
+
       <motion.div
         className="
           absolute
-          w-[290px]
-          h-[290px]
+          w-[380px]
+          h-[380px]
           rounded-full
           border
-          border-accent-500/15
-          dark:border-accent-400/20
+          border-indigo-400/20
         "
         animate={{
           rotate: -360,
         }}
         transition={{
-          duration: 30,
+          duration: 28,
           repeat: Infinity,
-          ease: "linear",
+          ease: 'linear',
         }}
-      />
+      >
+        {outerIcons.map((item, index) => {
+          const angle =
+            index * (360 / outerIcons.length);
 
-      {/* Tech Icons */}
-     {techOrbitItems.map((item, index) => {
-  const iconAngles = {
-    Python: 130,  // bottom
-    React: 0,     // right
-    Angular: 50,  // bottom
-    Node: 180,    // left
-  };
-
-  const angle =
-    (iconAngles[item.name as keyof typeof iconAngles] * Math.PI) / 180;
-
-  const x = Math.cos(angle) * orbitRadius;
-  const y = Math.sin(angle) * orbitRadius;
-
-  const Icon = item.icon;
-
-  return (
-    <motion.div
-      key={item.name}
-      className="
-        absolute
-        z-[60]
-        w-12
-        h-12
-        flex
-        items-center
-        justify-center
-        rounded-full
-        bg-[#10131d]/90
-        backdrop-blur-md
-        border
-        border-white/10
-        pointer-events-auto
-      "
-      style={{
-        x,
-        y,
-        boxShadow: `
-          0 8px 20px rgba(0,0,0,0.45),
-          0 0 18px ${item.color}66,
-          0 0 35px ${item.color}22,
-          inset 0 1px 2px rgba(255,255,255,0.15)
-        `,
-      }}
-      animate={{
-        scale: [1, 1.08, 1],
-      }}
-      transition={{
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: index * 0.5,
-      }}
-      whileHover={{
-        scale: 1.25,
-        boxShadow: `
-          0 12px 30px rgba(0,0,0,0.5),
-          0 0 30px ${item.color}99
-        `,
-      }}
-      title={item.name}
-    >
-      <Icon
-        className="text-[30px]"
-        style={{
-          color: item.color,
-          filter: `
-            drop-shadow(0 0 5px ${item.color})
-            drop-shadow(0 0 10px ${item.color}66)
-          `,
-        }}
-      />
-    </motion.div>
-  );
-})}
+          return (
+            <TechOrbitIcon
+              key={item.name}
+              item={item}
+              angle={angle}
+              radius={outerRadius}
+              reverseRotation={false}
+              duration={28}
+            />
+          );
+        })}
+      </motion.div>
     </div>
   );
 };
@@ -351,101 +420,138 @@ const ProfileAvatar: React.FC = () => {
     >
       {/* =================================================
           ORBITING ICONS
-          Always above avatar
       ================================================= */}
 
       <OrbitingIcons />
 
       {/* =================================================
-          AVATAR
-          Lower z-index than orbit icons
+          OUTER PORTRAIT GLOW
+          This element MUST NOT have overflow-hidden
       ================================================= */}
 
       <motion.div
         className="
-          relative
+          absolute
           z-10
+          left-1/2
+          top-1/2
+          -translate-x-1/2
+          -translate-y-1/2
           w-48
           h-48
           md:w-60
           md:h-60
-          mx-auto
           rounded-full
-          overflow-hidden
-          bg-black
         "
         animate={{
           boxShadow: [
-            '0 0 30px rgba(108, 99, 255, 0.4), 0 0 60px rgba(0, 212, 255, 0.2)',
-
-            '0 0 50px rgba(108, 99, 255, 0.6), 0 0 80px rgba(0, 212, 255, 0.4)',
-
-            '0 0 30px rgba(108, 99, 255, 0.4), 0 0 60px rgba(0, 212, 255, 0.2)',
+            `
+              0 0 20px rgba(108, 99, 255, 0.25),
+              0 0 45px rgba(0, 212, 255, 0.12)
+            `,
+            `
+              0 0 35px rgba(108, 99, 255, 0.45),
+              0 0 70px rgba(0, 212, 255, 0.25)
+            `,
+            `
+              0 0 55px rgba(108, 99, 255, 0.65),
+              0 0 100px rgba(0, 212, 255, 0.40)
+            `,
+            `
+              0 0 75px rgba(108, 99, 255, 0.80),
+              0 0 130px rgba(0, 212, 255, 0.50)
+            `,
+            `
+              0 0 55px rgba(108, 99, 255, 0.65),
+              0 0 100px rgba(0, 212, 255, 0.40)
+            `,
+            `
+              0 0 35px rgba(108, 99, 255, 0.45),
+              0 0 70px rgba(0, 212, 255, 0.25)
+            `,
+            `
+              0 0 20px rgba(108, 99, 255, 0.25),
+              0 0 45px rgba(0, 212, 255, 0.12)
+            `,
           ],
         }}
         transition={{
-          duration: 3,
+          duration: 3.5,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
       >
         {/* =================================================
-            PHOTO BACKGROUND
+            ACTUAL IMAGE
+            overflow-hidden ONLY HERE
         ================================================= */}
 
         <div
           className="
-            absolute
-            inset-0
-            bg-gradient-to-br
-            from-primary-500
-            via-accent-500
-            to-primary-600
+            relative
+            w-full
+            h-full
+            rounded-full
+            overflow-hidden
+            bg-black
           "
-        />
+        >
+          {/* Photo background */}
 
-        {/* =================================================
-            PROFILE IMAGE
-        ================================================= */}
-
-        <div className="absolute inset-0 flex items-center justify-center">
-          <img
-            src={profileImg}
-            alt={profileInfo.name}
+          <div
             className="
-              w-full
-              h-full
-              object-cover
-              object-center
+              absolute
+              inset-0
+              bg-gradient-to-br
+              from-primary-500
+              via-accent-500
+              to-primary-600
+            "
+          />
+
+          {/* Profile image */}
+
+          <div
+            className="
+              absolute
+              inset-0
+              flex
+              items-center
+              justify-center
+            "
+          >
+            <img
+              src={profileImg}
+              alt={profileInfo.name}
+              className="
+                w-full
+                h-full
+                object-cover
+                object-center
+              "
+            />
+          </div>
+
+          {/* Subtle image edge glow */}
+
+          <div
+            className="
+              absolute
+              inset-0
+              rounded-full
+              border
+              border-white/10
+              pointer-events-none
             "
           />
         </div>
-
-        {/* =================================================
-            GRADIENT OVERLAY
-        ================================================= */}
-
-        <div
-          className="
-            absolute
-            -inset-1
-            rounded-full
-            bg-gradient-to-br
-            from-primary-500
-            via-accent-500
-            to-primary-600
-            opacity-40
-            blur-sm
-            -z-10
-          "
-        />
       </motion.div>
 
       {/* =================================================
           FLOATING BADGES
       ================================================= */}
 
-      {floatingBadges.map((badge, index) => (
+      {/* {floatingBadges.map((badge, index) => (
         <motion.div
           key={badge.text}
           className={`
@@ -496,7 +602,7 @@ const ProfileAvatar: React.FC = () => {
             {badge.text}
           </span>
         </motion.div>
-      ))}
+      ))} */}
     </motion.div>
   );
 };
