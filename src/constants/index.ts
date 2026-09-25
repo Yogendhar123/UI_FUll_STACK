@@ -1,5 +1,5 @@
 import { getExperienceYears } from "../utiles/experience";
-
+import { SiReact, SiAngular, SiNodedotjs, SiPython } from "react-icons/si";
 const experienceYears = getExperienceYears();
 
 export const tagColorMap = {
@@ -265,10 +265,27 @@ export const profileInfo = {
 };
 
 export const techOrbitItems = [
-  { name: "React", icon: "⚛️", color: "#61DAFB" },
-  { name: "Angular", icon: "🅰️", color: "#DD0031" },
-  { name: "Node", icon: "🟢", color: "#339933" },
-  { name: "Python", icon: "🐍", color: "#3776AB" },
+  {
+    name: "React",
+    icon: SiReact,
+    color: "#61DAFB",
+  },
+  {
+    name: "Angular",
+    icon: SiAngular,
+    color: "#DD0031",
+  },
+  {
+    name: "Node",
+    icon: SiNodedotjs,
+    color: "#339933",
+  },
+  {
+    name: "Python",
+    icon: SiPython,
+    color: "#3776AB",
+  },
+  
 ];
 
 export const floatingBadges = [
