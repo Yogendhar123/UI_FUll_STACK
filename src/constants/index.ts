@@ -214,6 +214,9 @@ export const personalProjects = [
   },
 ];
 
+export const credlyProfileUrl =
+  "https://www.credly.com/users/yogendhar-sri-ram-bolisetti/edit/badges/credly";
+
 export const certifications = [
   {
     title: "Claude Certified Associate - Foundations",
