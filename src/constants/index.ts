@@ -8,6 +8,8 @@ import {
   
 } from 'react-icons/si';
 import { VscAzure } from "react-icons/vsc";
+import certBadge from "../assests/claude-certified-associate-foundations.png";
+import certFile from "../assests/Claude_Certified_Associate_Foundations_Certificate.pdf";
 const experienceYears = getExperienceYears();
 
 export const tagColorMap = {
@@ -42,6 +44,7 @@ export const navLinks = [
   { id: "experience", title: "Experience" },
   { id: "skills", title: "Skills" },
   { id: "projects", title: "Projects" },
+  { id: "certifications", title: "Certifications" },
   { id: "contact", title: "Contact" },
 ];
 
@@ -208,6 +211,21 @@ export const personalProjects = [
       { name: "TailwindCss", color: "violet" },
     ],
     source_code_link: "https://stockvisionlite.netlify.app/",
+  },
+];
+
+export const certifications = [
+  {
+    title: "Claude Certified Associate - Foundations",
+    issuer: "Anthropic",
+    issueDate: "Sep 2026",
+    expiryDate: "Sep 2027",
+    credentialId: "ANTH516426",
+    score: "884 / 1000 (Pass)",
+    badgeImage: certBadge,
+    credentialUrl:
+      "https://www.credly.com/badges/6e9de643-68f8-4bf6-8dd0-853015d972ed",
+    certificateFile: certFile,
   },
 ];
 
