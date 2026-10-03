@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Award, ExternalLink, Download, CheckCircle2 } from 'lucide-react';
+import { Award, ExternalLink, Download, CheckCircle2, FileText } from 'lucide-react';
 import { certifications, credlyProfileUrl } from '../constants';
 
 export const Certifications: React.FC = () => {
@@ -31,7 +31,7 @@ export const Certifications: React.FC = () => {
         <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {certifications.map((cert, index) => (
             <motion.div
-              key={cert.credentialId}
+              key={cert.credentialUrl}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ delay: index * 0.15, duration: 0.5 }}
@@ -61,16 +61,20 @@ export const Certifications: React.FC = () => {
                 <p>
                   Issued {cert.issueDate} &middot; Expires {cert.expiryDate}
                 </p>
-                <p className="font-mono text-xs text-gray-500 dark:text-gray-500">
-                  Credential ID: {cert.credentialId}
-                </p>
-                <p className="flex items-center justify-center gap-1 text-green-600 dark:text-green-400 font-medium">
-                  <CheckCircle2 size={14} />
-                  {cert.score}
-                </p>
+                {cert.credentialId && (
+                  <p className="font-mono text-xs text-gray-500 dark:text-gray-500">
+                    Credential ID: {cert.credentialId}
+                  </p>
+                )}
+                {cert.score && (
+                  <p className="flex items-center justify-center gap-1 text-green-600 dark:text-green-400 font-medium">
+                    <CheckCircle2 size={14} />
+                    {cert.score}
+                  </p>
+                )}
               </div>
 
-              <div className="flex items-center gap-3 mt-auto">
+              <div className="flex flex-wrap items-center justify-center gap-3 mt-auto">
                 <motion.a
                   href={cert.credentialUrl}
                   target="_blank"
@@ -94,6 +98,20 @@ export const Certifications: React.FC = () => {
                   <Download size={14} />
                   Certificate
                 </motion.a>
+                {"scoreReportFile" in cert && cert.scoreReportFile && (
+                  <motion.a
+                    href={cert.scoreReportFile}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-dark-surface text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-dark-border hover:border-primary-500 dark:hover:border-primary-500 transition-colors"
+                  >
+                    <FileText size={14} />
+                    Score Report
+                  </motion.a>
+                )}
               </div>
             </motion.div>
           ))}

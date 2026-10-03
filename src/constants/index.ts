@@ -10,6 +10,10 @@ import {
 import { VscAzure } from "react-icons/vsc";
 import certBadge from "../assests/claude-certified-associate-foundations.png";
 import certFile from "../assests/Claude_Certified_Associate_Foundations_Certificate.pdf";
+import scoreReportFile from "../assests/Claude_Certified_Associate_Foundations_Score_Report.pdf";
+import devScoreReportFile from "../assests/Claude_Certified_Developer_Foundations_Score_Report.pdf";
+import devCertBadge from "../assests/claude-certified-developer-foundations.png";
+import devCertFile from "../assests/Claude_Certified_Developer_Foundations_Certificate.pdf";
 const experienceYears = getExperienceYears();
 
 export const tagColorMap = {
@@ -229,6 +233,20 @@ export const certifications = [
     credentialUrl:
       "https://www.credly.com/badges/6e9de643-68f8-4bf6-8dd0-853015d972ed",
     certificateFile: certFile,
+    scoreReportFile: scoreReportFile,
+  },
+  {
+    title: "Claude Certified Developer - Foundations",
+    issuer: "Anthropic",
+    issueDate: "Oct 2026",
+    expiryDate: "Oct 2027",
+    credentialId: "ANTH516426",
+    score: "985 / 1000 (Pass)",
+    badgeImage: devCertBadge,
+    credentialUrl:
+      "https://www.credly.com/badges/15f80836-0e00-443d-823a-5ad4c2e56e63",
+    certificateFile: devCertFile,
+    scoreReportFile: devScoreReportFile,
   },
 ];
 
