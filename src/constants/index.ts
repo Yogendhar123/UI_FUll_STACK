@@ -228,7 +228,21 @@ export const credlyProfileUrl =
 
 export const certifications = [
   {
+    title: "Google Cloud Certified - Associate Cloud Engineer",
+    shortName: "GCP",
+    issuer: "Google Cloud",
+    issueDate: "Mar 2023",
+    expiryDate: "Sep 2027",
+    credentialId: "cbfba5a7a57d44a89694c08f77bc35b5",
+    score: "",
+    badgeImage: gcpCertBadge,
+    credentialUrl:
+      "https://www.credly.com/earner/earned/badge/1383eb59-9a06-4225-b64b-288412fb1f34",
+    certificateFile: gcpCertFile,
+  },
+  {
     title: "Claude Certified Associate - Foundations",
+    shortName: "Associate",
     issuer: "Anthropic",
     issueDate: "Sep 2026",
     expiryDate: "Sep 2027",
@@ -242,6 +256,7 @@ export const certifications = [
   },
   {
     title: "Claude Certified Developer - Foundations",
+    shortName: "Developer",
     issuer: "Anthropic",
     issueDate: "Oct 2026",
     expiryDate: "Oct 2027",
@@ -255,6 +270,7 @@ export const certifications = [
   },
   {
     title: "Claude Certified Architect - Foundations",
+    shortName: "Architect",
     issuer: "Anthropic",
     issueDate: "Oct 2026",
     expiryDate: "Oct 2027",
@@ -265,18 +281,6 @@ export const certifications = [
       "https://www.credly.com/badges/a17d432a-85bd-4e6f-8ecb-10fbed2c007c",
     certificateFile: archCertFile,
     scoreReportFile: archScoreReportFile,
-  },
-  {
-    title: "Google Cloud Certified - Associate Cloud Engineer",
-    issuer: "Google Cloud",
-    issueDate: "Mar 2023",
-    expiryDate: "Sep 2027",
-    credentialId: "cbfba5a7a57d44a89694c08f77bc35b5",
-    score: "",
-    badgeImage: gcpCertBadge,
-    credentialUrl:
-      "https://www.credly.com/earner/earned/badge/1383eb59-9a06-4225-b64b-288412fb1f34",
-    certificateFile: gcpCertFile,
   },
 ];
 

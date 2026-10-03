@@ -128,22 +128,15 @@ const handleDownloadCV = () => {
    CERTIFICATION BADGES (small, linked to Credly)
 ========================================================= */
 
-const anthropicCerts = certifications.filter(
-  (cert) => cert.issuer === 'Anthropic'
-);
-
-const shortCertName = (title: string) =>
-  title.replace('Claude Certified ', '').replace(' - Foundations', '');
-
 const HeroCertBadges: React.FC = () => (
   <div
     className="
       inline-flex
       flex-col
-      sm:flex-row
+      lg:flex-row
       items-center
       gap-3
-      sm:gap-5
+      lg:gap-5
       px-5
       py-3
       rounded-2xl
@@ -160,25 +153,25 @@ const HeroCertBadges: React.FC = () => (
       <Award size={18} className="text-primary-500 shrink-0" />
       <div className="leading-tight">
         <p className="text-[11px] uppercase tracking-wider font-semibold text-primary-600 dark:text-primary-400">
-          Anthropic Certified
+          Certified
         </p>
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          {anthropicCerts.length} credentials · Foundations
+          {certifications.length} credentials
         </p>
       </div>
     </div>
 
-    <div className="hidden sm:block w-px h-9 bg-gray-200 dark:bg-dark-border" />
+    <div className="hidden lg:block w-px h-9 bg-gray-200 dark:bg-dark-border" />
 
     <div className="flex items-center gap-3">
-      {anthropicCerts.map((cert) => (
+      {certifications.map((cert) => (
         <motion.a
           key={cert.credentialUrl}
           href={cert.credentialUrl}
           target="_blank"
           rel="noopener noreferrer"
-          title={`${cert.title} – verify on Credly`}
-          aria-label={`${cert.title} – verify on Credly`}
+          title={`${cert.title} – verify credential`}
+          aria-label={`${cert.title} – verify credential`}
           whileHover={{ y: -4, scale: 1.12 }}
           whileTap={{ scale: 0.95 }}
           className="group relative flex flex-col items-center"
@@ -190,7 +183,7 @@ const HeroCertBadges: React.FC = () => (
             className="w-11 h-11 sm:w-12 sm:h-12 object-contain drop-shadow-md"
           />
           <span className="mt-1 text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-primary-500 transition-colors">
-            {shortCertName(cert.title)}
+            {cert.shortName}
           </span>
         </motion.a>
       ))}
