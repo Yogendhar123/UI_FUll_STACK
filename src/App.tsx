@@ -1,5 +1,6 @@
 import { ThemeProvider } from './context/ThemeContext';
 import { Header } from './components/Header';
+import { MobileNav } from './components/MobileNav';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Experience } from './components/Experience';
@@ -13,8 +14,9 @@ function App() {
   
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-white dark:bg-dark transition-colors duration-300">
+      <div className="min-h-screen bg-white dark:bg-dark transition-colors duration-300 pb-16 md:pb-0">
         <Header />
+        <MobileNav />
         <main>
           <Hero />
           <About />

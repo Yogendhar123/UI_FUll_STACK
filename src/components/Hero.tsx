@@ -1,12 +1,13 @@
 import { useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ChevronDown, Download, Github, Linkedin } from 'lucide-react';
+import { ChevronDown, Download, Github, Linkedin, Award } from 'lucide-react';
 import {
   profileInfo,
   stats,
   techOrbitItems,
   floatingBadges,
+  certifications,
 } from '../constants';
 
 import profileImg from '../assests/photo.jpeg';
@@ -122,6 +123,80 @@ const handleDownloadCV = () => {
 
   document.body.removeChild(link);
 };
+
+/* =========================================================
+   CERTIFICATION BADGES (small, linked to Credly)
+========================================================= */
+
+const anthropicCerts = certifications.filter(
+  (cert) => cert.issuer === 'Anthropic'
+);
+
+const shortCertName = (title: string) =>
+  title.replace('Claude Certified ', '').replace(' - Foundations', '');
+
+const HeroCertBadges: React.FC = () => (
+  <div
+    className="
+      inline-flex
+      flex-col
+      sm:flex-row
+      items-center
+      gap-3
+      sm:gap-5
+      px-5
+      py-3
+      rounded-2xl
+      bg-white/70
+      dark:bg-dark-card/60
+      backdrop-blur-md
+      border
+      border-gray-200
+      dark:border-dark-border
+      shadow-sm
+    "
+  >
+    <div className="flex items-center gap-2 text-left">
+      <Award size={18} className="text-primary-500 shrink-0" />
+      <div className="leading-tight">
+        <p className="text-[11px] uppercase tracking-wider font-semibold text-primary-600 dark:text-primary-400">
+          Anthropic Certified
+        </p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">
+          {anthropicCerts.length} credentials · Foundations
+        </p>
+      </div>
+    </div>
+
+    <div className="hidden sm:block w-px h-9 bg-gray-200 dark:bg-dark-border" />
+
+    <div className="flex items-center gap-3">
+      {anthropicCerts.map((cert) => (
+        <motion.a
+          key={cert.credentialUrl}
+          href={cert.credentialUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={`${cert.title} – verify on Credly`}
+          aria-label={`${cert.title} – verify on Credly`}
+          whileHover={{ y: -4, scale: 1.12 }}
+          whileTap={{ scale: 0.95 }}
+          className="group relative flex flex-col items-center"
+        >
+          <img
+            src={cert.badgeImage}
+            alt={`${cert.title} badge`}
+            loading="lazy"
+            className="w-11 h-11 sm:w-12 sm:h-12 object-contain drop-shadow-md"
+          />
+          <span className="mt-1 text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-primary-500 transition-colors">
+            {shortCertName(cert.title)}
+          </span>
+        </motion.a>
+      ))}
+    </div>
+  </div>
+);
 
 /* =========================================================
    PARTICLE FIELD
@@ -933,6 +1008,17 @@ export const Hero: React.FC = () => {
                   />
                 </motion.a>
               </div>
+            </motion.div>
+
+            {/* =================================================
+                CERTIFICATION BADGES
+            ================================================= */}
+
+            <motion.div
+              variants={itemVariants}
+              className="mt-8 flex justify-center md:justify-start"
+            >
+              <HeroCertBadges />
             </motion.div>
 
             {/* =================================================

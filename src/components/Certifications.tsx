@@ -28,15 +28,15 @@ export const Certifications: React.FC = () => {
           </p>
         </motion.div>
 
-        <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ref={ref} className="flex flex-wrap justify-center gap-8">
           {certifications.map((cert, index) => (
             <motion.div
-              key={cert.credentialUrl}
+              key={cert.title}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ delay: index * 0.15, duration: 0.5 }}
               whileHover={{ scale: 1.02, y: -4 }}
-              className="card p-6 flex flex-col items-center text-center"
+              className="card p-6 flex flex-col items-center text-center w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)]"
             >
               <div className="w-28 h-28 mb-5">
                 <img
@@ -75,17 +75,19 @@ export const Certifications: React.FC = () => {
               </div>
 
               <div className="flex flex-wrap items-center justify-center gap-3 mt-auto">
-                <motion.a
-                  href={cert.credentialUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-dark-surface text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-dark-border hover:border-primary-500 dark:hover:border-primary-500 transition-colors"
-                >
-                  <ExternalLink size={14} />
-                  Verify
-                </motion.a>
+                {cert.credentialUrl && (
+                  <motion.a
+                    href={cert.credentialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-dark-surface text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-dark-border hover:border-primary-500 dark:hover:border-primary-500 transition-colors"
+                  >
+                    <ExternalLink size={14} />
+                    Verify
+                  </motion.a>
+                )}
                 <motion.a
                   href={cert.certificateFile}
                   target="_blank"
