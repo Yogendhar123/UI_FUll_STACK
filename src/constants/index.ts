@@ -17,6 +17,9 @@ import archCertFile from "../assests/Claude_Certified_Architect_Foundations_Cert
 import archScoreReportFile from "../assests/Claude_Certified_Architect_Foundations_Score_Report.pdf";
 import gcpCertBadge from "../assests/google-cloud-associate-cloud-engineer.png";
 import gcpCertFile from "../assests/Google_Cloud_Associate_Cloud_Engineer_Certificate.pdf";
+import archProCertBadge from "../assests/claude-certified-architect-professional.png";
+import archProCertFile from "../assests/Claude_Certified_Architect_Professional_Certificate.pdf";
+import archProScoreReportFile from "../assests/Claude_Certified_Architect_Professional_Score_Report.pdf";
 import devCertBadge from "../assests/claude-certified-developer-foundations.png";
 import devCertFile from "../assests/Claude_Certified_Developer_Foundations_Certificate.pdf";
 const experienceYears = getExperienceYears();
@@ -281,6 +284,20 @@ export const certifications = [
       "https://www.credly.com/badges/a17d432a-85bd-4e6f-8ecb-10fbed2c007c",
     certificateFile: archCertFile,
     scoreReportFile: archScoreReportFile,
+  },
+  {
+    title: "Claude Certified Architect - Professional",
+    shortName: "Arch Pro",
+    issuer: "Anthropic",
+    issueDate: "Oct 2026",
+    expiryDate: "Oct 2027",
+    credentialId: "ANTH516426",
+    score: "943 / 1000 (Pass)",
+    badgeImage: archProCertBadge,
+    credentialUrl:
+      "https://www.credly.com/badges/cfa6c2c6-d7e2-48ff-aeb5-b8d15a535b64",
+    certificateFile: archProCertFile,
+    scoreReportFile: archProScoreReportFile,
   },
 ];
 

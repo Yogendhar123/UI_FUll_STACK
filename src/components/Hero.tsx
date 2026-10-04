@@ -133,10 +133,10 @@ const HeroCertBadges: React.FC = () => (
     className="
       inline-flex
       flex-col
-      lg:flex-row
+      xl:flex-row
       items-center
       gap-3
-      lg:gap-5
+      xl:gap-5
       px-5
       py-3
       rounded-2xl
@@ -161,9 +161,9 @@ const HeroCertBadges: React.FC = () => (
       </div>
     </div>
 
-    <div className="hidden lg:block w-px h-9 bg-gray-200 dark:bg-dark-border" />
+    <div className="hidden xl:block w-px h-9 bg-gray-200 dark:bg-dark-border" />
 
-    <div className="flex items-center gap-3">
+    <div className="flex flex-wrap items-center justify-center gap-3">
       {certifications.map((cert) => (
         <motion.a
           key={cert.credentialUrl}
