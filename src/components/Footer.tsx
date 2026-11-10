@@ -83,7 +83,7 @@ export const Footer: React.FC = () => {
             {currentYear} {profileInfo.name}. All rights reserved.
           </p>
           <p className="flex items-center gap-1">
-            Made with <Heart size={14} className="text-red-500" /> using React & Tailwind
+            Made with <Heart size={14} className="text-accent-500 dark:text-primary-500" /> using React & Tailwind
           </p>
         </div>
       </div>

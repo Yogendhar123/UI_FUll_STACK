@@ -5,7 +5,6 @@ import { technologies, additionalSkills } from '../constants';
 
 const SkillBar: React.FC<{ name: string; color: string; proficiency: number; index: number }> = ({
   name,
-  color,
   proficiency,
   index,
 }) => {
@@ -29,9 +28,9 @@ const SkillBar: React.FC<{ name: string; color: string; proficiency: number; ind
         <motion.div
           className="h-full rounded-full"
           style={{
-            backgroundColor: color,
+            backgroundColor: "rgb(var(--color-primary-500))",
             width: `${width}%`,
-            boxShadow: `0 0 10px ${color}40`,
+            boxShadow: "0 0 10px rgb(var(--color-primary-500) / 0.25)",
           }}
           initial={{ width: 0 }}
           animate={{ width: inView ? `${proficiency}%` : 0 }}
@@ -49,11 +48,11 @@ export const Skills: React.FC = () => {
   });
 
   const categoryColors: Record<string, string> = {
-    Frontend: "#3B82F6",
-    Backend: "#10B981",
-    Database: "#22C55E",
-    "Cloud & DevOps": "#0EA5E9",
-    Tools: "#F59E0B",
+    Frontend: "rgb(var(--color-primary-500))",
+    Backend: "rgb(var(--color-accent-500))",
+    Database: "rgb(var(--color-primary-500))",
+    "Cloud & DevOps": "rgb(var(--color-accent-500))",
+    Tools: "rgb(var(--color-primary-500))",
   };
 
   const groupedTechnologies = technologies.reduce((acc, tech) => {
@@ -93,7 +92,7 @@ export const Skills: React.FC = () => {
               <div className="flex items-center gap-3 mb-6">
                 <div
                   className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: categoryColors[category] || "#6C63FF" }}
+                  style={{ backgroundColor: categoryColors[category] || "rgb(var(--color-primary-500))" }}
                 />
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {category}

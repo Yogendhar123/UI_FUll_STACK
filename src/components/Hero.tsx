@@ -10,6 +10,7 @@ import {
   certifications,
 } from '../constants';
 
+import { useTheme } from '../context/ThemeContext';
 import profileImg from '../assests/photo.jpeg';
 import resume from '../assests/Full_Stack_Developer_Yogendhar_Resume.pdf';
 
@@ -283,7 +284,7 @@ const TechOrbitIcon: React.FC<{
         items-center
         justify-center
         rounded-full
-        bg-[#10131d]/95
+        bg-dark/95
         backdrop-blur-md
         border
         border-white/10
@@ -296,10 +297,10 @@ const TechOrbitIcon: React.FC<{
         marginTop: '-24px',
 
         boxShadow: `
-          0 8px 20px rgba(0,0,0,0.45),
+          0 8px 20px rgb(28 29 32 / 0.45),
           0 0 18px ${item.color}66,
           0 0 35px ${item.color}22,
-          inset 0 1px 2px rgba(255,255,255,0.15)
+          inset 0 1px 2px rgb(242 244 241 / 0.15)
         `,
       }}
       animate={{
@@ -323,7 +324,7 @@ const TechOrbitIcon: React.FC<{
         scale: 1.25,
 
         boxShadow: `
-          0 12px 30px rgba(0,0,0,0.5),
+          0 12px 30px rgb(28 29 32 / 0.5),
           0 0 30px ${item.color}99,
           0 0 50px ${item.color}55
         `,
@@ -387,7 +388,7 @@ const OrbitingIcons: React.FC = () => {
           h-[300px]
           rounded-full
           border
-          border-cyan-400/20
+          border-primary-400/20
         "
         animate={{
           rotate: 360,
@@ -427,7 +428,7 @@ const OrbitingIcons: React.FC = () => {
           h-[380px]
           rounded-full
           border
-          border-indigo-400/20
+          border-accent-400/20
         "
         animate={{
           rotate: -360,
@@ -463,6 +464,10 @@ const OrbitingIcons: React.FC = () => {
 ========================================================= */
 
 const ProfileAvatar: React.FC = () => {
+  const { theme } = useTheme();
+  const glowA = theme === 'dark' ? '255, 201, 40' : '141, 185, 240'; // primary accent
+  const glowB = theme === 'dark' ? '242, 244, 241' : '245, 182, 158'; // secondary accent
+
   return (
     <motion.div
       className="
@@ -514,32 +519,32 @@ const ProfileAvatar: React.FC = () => {
         animate={{
           boxShadow: [
             `
-              0 0 20px rgba(108, 99, 255, 0.25),
-              0 0 45px rgba(0, 212, 255, 0.12)
+              0 0 20px rgba(${glowA}, 0.25),
+              0 0 45px rgba(${glowB}, 0.12)
             `,
             `
-              0 0 35px rgba(108, 99, 255, 0.45),
-              0 0 70px rgba(0, 212, 255, 0.25)
+              0 0 35px rgba(${glowA}, 0.45),
+              0 0 70px rgba(${glowB}, 0.25)
             `,
             `
-              0 0 55px rgba(108, 99, 255, 0.65),
-              0 0 100px rgba(0, 212, 255, 0.40)
+              0 0 55px rgba(${glowA}, 0.65),
+              0 0 100px rgba(${glowB}, 0.40)
             `,
             `
-              0 0 75px rgba(108, 99, 255, 0.80),
-              0 0 130px rgba(0, 212, 255, 0.50)
+              0 0 75px rgba(${glowA}, 0.80),
+              0 0 130px rgba(${glowB}, 0.50)
             `,
             `
-              0 0 55px rgba(108, 99, 255, 0.65),
-              0 0 100px rgba(0, 212, 255, 0.40)
+              0 0 55px rgba(${glowA}, 0.65),
+              0 0 100px rgba(${glowB}, 0.40)
             `,
             `
-              0 0 35px rgba(108, 99, 255, 0.45),
-              0 0 70px rgba(0, 212, 255, 0.25)
+              0 0 35px rgba(${glowA}, 0.45),
+              0 0 70px rgba(${glowB}, 0.25)
             `,
             `
-              0 0 20px rgba(108, 99, 255, 0.25),
-              0 0 45px rgba(0, 212, 255, 0.12)
+              0 0 20px rgba(${glowA}, 0.25),
+              0 0 45px rgba(${glowB}, 0.12)
             `,
           ],
         }}
@@ -754,13 +759,13 @@ export const Hero: React.FC = () => {
         style={{
           backgroundImage: `
             linear-gradient(
-              rgba(108, 99, 255, 0.3)
+              rgb(var(--color-primary-500) / 0.3)
               1px,
               transparent 1px
             ),
             linear-gradient(
               90deg,
-              rgba(108, 99, 255, 0.3)
+              rgb(var(--color-primary-500) / 0.3)
               1px,
               transparent 1px
             )

@@ -73,7 +73,7 @@ export const About: React.FC = () => {
               whileHover={{ scale: 1.03, y: -4 }}
               className="card p-6 group"
             >
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-on-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                 {iconMap[card.title]}
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">

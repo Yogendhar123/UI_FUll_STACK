@@ -22,7 +22,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       className="card p-6 group h-full flex flex-col"
     >
       <div className="flex items-start justify-between mb-4">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-white flex items-center justify-center">
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-on-accent flex items-center justify-center">
           <Folder size={24} />
         </div>
         <motion.a
@@ -108,7 +108,7 @@ export const Projects: React.FC = () => {
               whileTap={{ scale: 0.98 }}
               className={`relative px-6 py-3 rounded-full font-medium text-sm transition-all ${
                 activeTab === tab.id
-                  ? 'text-white'
+                  ? 'text-on-accent'
                   : 'bg-gray-100 dark:bg-dark-card text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-dark-surface'
               }`}
             >
@@ -121,7 +121,7 @@ export const Projects: React.FC = () => {
               )}
               <span className="relative z-10">
                 {tab.label}
-                <span className="ml-2 px-2 py-0.5 rounded-full bg-white/20 text-xs">
+                <span className="ml-2 px-2 py-0.5 rounded-full bg-on-accent/20 text-xs">
                   {tab.count}
                 </span>
               </span>

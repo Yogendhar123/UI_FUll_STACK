@@ -67,7 +67,7 @@ export const Experience: React.FC = () => {
                 {/* Company Badge */}
                 <div className="flex-shrink-0">
                   <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-display font-bold text-xl shadow-lg"
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-on-accent font-display font-bold text-xl shadow-lg"
                     style={{ backgroundColor: exp.iconBg }}
                   >
                     TCS

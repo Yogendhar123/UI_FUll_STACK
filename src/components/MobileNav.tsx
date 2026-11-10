@@ -166,7 +166,7 @@ export const MobileNav: React.FC = () => {
                   <span
                     className={`flex items-center justify-center w-full h-full rounded-full border transition-colors ${
                       isActive
-                        ? 'bg-gradient-to-br from-primary-500 to-accent-500 text-white border-transparent shadow-lg shadow-primary-500/40'
+                        ? 'bg-gradient-to-br from-primary-500 to-accent-500 text-on-accent border-transparent shadow-lg shadow-primary-500/40'
                         : 'bg-white dark:bg-dark-card text-primary-600 dark:text-primary-400 border-gray-200 dark:border-dark-border shadow-md'
                     }`}
                   >
@@ -193,7 +193,7 @@ export const MobileNav: React.FC = () => {
           style={{ left: -BUTTON / 2, top: -BUTTON / 2, width: BUTTON, height: BUTTON }}
           className={`absolute flex items-center justify-center rounded-full border-2 ring-4 ring-white dark:ring-dark text-primary-600 dark:text-primary-400 bg-white dark:bg-dark-card transition-shadow ${
             open
-              ? 'border-primary-400 shadow-[0_0_24px_rgba(108,99,255,0.55)]'
+              ? 'border-primary-400 shadow-[0_0_24px_rgb(var(--color-primary-500)/0.55)]'
               : 'border-primary-500/60 shadow-lg shadow-primary-500/20'
           }`}
         >

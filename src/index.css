@@ -1,5 +1,75 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@500;600;700&display=swap');
 
+/* ---------------------------------------------------------------
+   Theme palettes (RGB channels so Tailwind opacity modifiers work)
+   Light : Powder Blue #8DB9F0 / Soft Lavender White #E9E8F8 / Warm Sunset Peach #F5B69E
+   Dark  : Deep Graphite #1C1D20 / Soft Cloud White #F2F4F1 / Sunshine Yellow #FFC928
+   Other shades are tints/shades derived from these three (for text contrast, borders, tracks).
+   --------------------------------------------------------------- */
+:root {
+  /* Light theme */
+  --color-white: 247 247 253; /* #F7F7FD */
+  --color-black: 28 29 32; /* #1C1D20 */
+  --color-on-accent: 29 42 69; /* #1D2A45 */
+  --color-gray-50: 233 232 248; /* #E9E8F8 */
+  --color-gray-100: 219 225 247; /* #DBE1F7 */
+  --color-gray-200: 201 216 245; /* #C9D8F5 */
+  --color-gray-300: 179 191 218; /* #B3BFDA */
+  --color-gray-400: 117 132 166; /* #7584A6 */
+  --color-gray-500: 85 101 138; /* #55658A */
+  --color-gray-600: 68 84 122; /* #44547A */
+  --color-gray-700: 52 69 107; /* #34456B */
+  --color-gray-800: 38 54 90; /* #26365A */
+  --color-gray-900: 29 42 69; /* #1D2A45 */
+  --color-primary-50: 238 244 253; /* #EEF4FD */
+  --color-primary-100: 220 233 250; /* #DCE9FA */
+  --color-primary-200: 201 221 248; /* #C9DDF8 */
+  --color-primary-300: 174 204 244; /* #AECCF4 */
+  --color-primary-400: 141 185 240; /* #8DB9F0 */
+  --color-primary-500: 141 185 240; /* #8DB9F0 */
+  --color-primary-600: 58 103 163; /* #3A67A3 */
+  --color-primary-700: 47 84 134; /* #2F5486 */
+  --color-primary-800: 38 69 112; /* #264570 */
+  --color-primary-900: 29 54 89; /* #1D3659 */
+  --color-accent-100: 251 228 219; /* #FBE4DB */
+  --color-accent-400: 245 182 158; /* #F5B69E */
+  --color-accent-500: 245 182 158; /* #F5B69E */
+  --color-accent-600: 154 74 48; /* #9A4A30 */
+  --color-accent-900: 110 50 32; /* #6E3220 */
+}
+
+.dark {
+  /* Dark theme */
+  --color-white: 242 244 241; /* #F2F4F1 */
+  --color-black: 28 29 32; /* #1C1D20 */
+  --color-on-accent: 28 29 32; /* #1C1D20 */
+  --color-gray-50: 43 44 47; /* #2B2C2F */
+  --color-gray-100: 43 44 47; /* #2B2C2F */
+  --color-gray-200: 58 59 61; /* #3A3B3D */
+  --color-gray-300: 210 212 210; /* #D2D4D2 */
+  --color-gray-400: 178 180 178; /* #B2B4B2 */
+  --color-gray-500: 146 147 147; /* #929393 */
+  --color-gray-600: 178 180 178; /* #B2B4B2 */
+  --color-gray-700: 210 212 210; /* #D2D4D2 */
+  --color-gray-800: 230 232 229; /* #E6E8E5 */
+  --color-gray-900: 242 244 241; /* #F2F4F1 */
+  --color-primary-50: 242 244 241; /* #F2F4F1 */
+  --color-primary-100: 242 244 241; /* #F2F4F1 */
+  --color-primary-200: 255 201 40; /* #FFC928 */
+  --color-primary-300: 255 201 40; /* #FFC928 */
+  --color-primary-400: 255 201 40; /* #FFC928 */
+  --color-primary-500: 255 201 40; /* #FFC928 */
+  --color-primary-600: 224 172 20; /* #E0AC14 */
+  --color-primary-700: 255 201 40; /* #FFC928 */
+  --color-primary-800: 255 201 40; /* #FFC928 */
+  --color-primary-900: 255 201 40; /* #FFC928 */
+  --color-accent-100: 242 244 241; /* #F2F4F1 */
+  --color-accent-400: 242 244 241; /* #F2F4F1 */
+  --color-accent-500: 242 244 241; /* #F2F4F1 */
+  --color-accent-600: 242 244 241; /* #F2F4F1 */
+  --color-accent-900: 242 244 241; /* #F2F4F1 */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -42,14 +112,14 @@
   }
 
   .btn-primary {
-    @apply bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold px-6 py-3 rounded-full
+    @apply bg-gradient-to-r from-primary-500 to-accent-500 text-on-accent font-semibold px-6 py-3 rounded-full
            transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25 hover:scale-[1.02]
            active:scale-[0.98];
   }
 
   .btn-secondary {
     @apply border-2 border-primary-500 text-primary-600 dark:text-primary-400 font-semibold px-6 py-3 rounded-full
-           transition-all duration-300 hover:bg-primary-500 hover:text-white;
+           transition-all duration-300 hover:bg-primary-500 hover:text-on-accent;
   }
 }
 

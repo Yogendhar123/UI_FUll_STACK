@@ -116,7 +116,7 @@ export const Header: React.FC = () => {
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? (
-                  <Sun size={20} className="text-yellow-500" />
+                  <Sun size={20} className="text-primary-500" />
                 ) : (
                   <Moon size={20} className="text-primary-600" />
                 )}

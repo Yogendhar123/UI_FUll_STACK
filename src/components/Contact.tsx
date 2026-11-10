@@ -151,7 +151,7 @@ export const Contact: React.FC = () => {
 
             <div className="space-y-6 mb-8">
               <motion.div whileHover={{ x: 5 }} className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-white flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-on-accent flex items-center justify-center flex-shrink-0">
                   <Mail size={20} />
                 </div>
                 <div>
@@ -165,7 +165,7 @@ export const Contact: React.FC = () => {
               </motion.div>
 
               <motion.div whileHover={{ x: 5 }} className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-white flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-on-accent flex items-center justify-center flex-shrink-0">
                   <Phone size={20} />
                 </div>
                 <div>
@@ -179,7 +179,7 @@ export const Contact: React.FC = () => {
               </motion.div>
 
               <motion.div whileHover={{ x: 5 }} className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-white flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-on-accent flex items-center justify-center flex-shrink-0">
                   <MapPin size={20} />
                 </div>
                 <div>
@@ -236,7 +236,7 @@ export const Contact: React.FC = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   className="card p-8 text-center"
                 >
-                  <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 flex items-center justify-center mx-auto mb-4">
                     <CheckCircle size={32} />
                   </div>
                   <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
@@ -321,7 +321,7 @@ export const Contact: React.FC = () => {
                     {isSubmitting ? (
                       <>
                         <svg
-                          className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                          className="animate-spin -ml-1 mr-2 h-4 w-4 text-on-accent"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"

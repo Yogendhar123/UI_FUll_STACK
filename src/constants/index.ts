@@ -26,28 +26,28 @@ const experienceYears = getExperienceYears();
 
 export const tagColorMap = {
   blue: {
-    bg: "bg-blue-100",
-    text: "text-blue-600",
-    darkBg: "dark:bg-blue-900/30",
-    darkText: "dark:text-blue-400",
+    bg: "bg-primary-100",
+    text: "text-primary-600",
+    darkBg: "dark:bg-primary-900/30",
+    darkText: "dark:text-primary-400",
   },
   green: {
-    bg: "bg-green-100",
-    text: "text-green-600",
-    darkBg: "dark:bg-green-900/30",
-    darkText: "dark:text-green-400",
+    bg: "bg-accent-100",
+    text: "text-accent-600",
+    darkBg: "dark:bg-accent-900/30",
+    darkText: "dark:text-accent-400",
   },
   pink: {
-    bg: "bg-pink-100",
-    text: "text-pink-600",
-    darkBg: "dark:bg-pink-900/30",
-    darkText: "dark:text-pink-400",
+    bg: "bg-primary-100",
+    text: "text-primary-600",
+    darkBg: "dark:bg-primary-900/30",
+    darkText: "dark:text-primary-400",
   },
   violet: {
-    bg: "bg-violet-100",
-    text: "text-violet-600",
-    darkBg: "dark:bg-violet-900/30",
-    darkText: "dark:text-violet-400",
+    bg: "bg-accent-100",
+    text: "text-accent-600",
+    darkBg: "dark:bg-accent-900/30",
+    darkText: "dark:text-accent-400",
   },
 };
 
@@ -82,7 +82,7 @@ export const experiences = [
   {
     title: "Full-Stack Developer | Azure",
     company_name: "TCS (Tata Consultancy Services)",
-    iconBg: "#383E56",
+    iconBg: "rgb(var(--color-primary-500))",
     date: "Feb 2022 - Present",
     points: [
       "Building and maintaining enterprise-grade web applications using React.js, Angular, Node.js, and modern JavaScript/TypeScript workflows.",

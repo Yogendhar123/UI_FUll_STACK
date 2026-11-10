@@ -67,7 +67,7 @@ export const Certifications: React.FC = () => {
                   </p>
                 )}
                 {cert.score && (
-                  <p className="flex items-center justify-center gap-1 text-green-600 dark:text-green-400 font-medium">
+                  <p className="flex items-center justify-center gap-1 text-primary-600 dark:text-primary-400 font-medium">
                     <CheckCircle2 size={14} />
                     {cert.score}
                   </p>
@@ -131,7 +131,7 @@ export const Certifications: React.FC = () => {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-md hover:shadow-lg transition-shadow"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-gradient-to-r from-primary-500 to-accent-500 text-on-accent shadow-md hover:shadow-lg transition-shadow"
           >
             <Award size={16} />
             View Full Profile on Credly
